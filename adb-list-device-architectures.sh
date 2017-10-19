@@ -1,15 +1,24 @@
 #!/usr/bin/env bash
 
-echo "List Device Architectures..."
+####
+# ADB - List All Device Architectures
+# author: Tim Reynolds : http://timreynolds.org
+####
+
+echo "\n\nList Device Architectures...\n\n"
 
 # get full path to adb just in case script gets confused
 ADBPATH="${ANDROID_HOME}/platform-tools"
 
 for SERIAL in $(adb devices | tail -n +2 | cut -sf 1);
    do
-     echo "**** Device Serial Number -> $SERIAL Architecture *****";
+     
+     echo "*********************************** "
+     echo "   Device Serial Number -> $SERIAL Architecture *****";
+     echo "*********************************** "
+
      adb -s $SERIAL shell getprop | grep -e manufacturer -e model -e abi
-     echo "**** END $SERIAL ****";
+     echo "\n**** END $SERIAL ****";
      echo "\r\n";
    done
 
